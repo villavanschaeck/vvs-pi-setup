@@ -48,5 +48,5 @@ $(IMAGE):
 	exit 1
 
 clean:
-	rm -f pi.img init.rd
+	rm -f pi.img init.rd installer.img
 	cd target_fs && git checkout -f
