@@ -1,0 +1,9 @@
+<?php
+	if(!mysql_connect('localhost', 'username', 'password')) {
+		return false;
+	}
+	if(!mysql_select_db('database')) {
+		return false;
+	}
+	return true;
+?>
