@@ -1,0 +1,4 @@
+wget -O /tmp/config.sh http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/config.php
+. /tmp/config.sh
+
+echo "$HOSTNAME" > /etc/hostname

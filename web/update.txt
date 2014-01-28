@@ -1,0 +1,9 @@
+wget -O - http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/pi.img | /usr/local/bin/oid /dev/mmcblk0
+mkdir /target
+mount -o rw /dev/mmcblk0p2 /target
+wget -O /target/tmp/install.txt http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/install.txt
+chroot /target /bin/sh /tmp/install.txt
+umount /target
+sync
+wget -O /dev/null http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/setup-complete.php
+reboot -f
