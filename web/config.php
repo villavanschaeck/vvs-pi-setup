@@ -5,7 +5,10 @@
 	}
 
 	if(!require('mysql.php')) {
-		echo "# Database error\n";
+		echo "echo Database error\n";
+		echo "sleep 60\n";
+		echo "reboot -f\n";
+		echo "exit 1\n";
 		exit;
 	}
 
@@ -14,5 +17,9 @@
 		echo 'HOSTNAME='. $row['hostname'] ."\n";
 		echo "DOMAIN=vvs-nijmegen.nl\n";
 		echo 'IP='. $row['ip'] ."\n";
+		echo 'EXTRA_SCRIPTS="'. str_replace(',', ' ', $row['functions']) ."\"\n";
+		if(is_file('local-config.txt')) {
+			readfile('local-config.txt');
+		}
 	}
 ?>

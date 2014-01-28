@@ -2,3 +2,27 @@ wget -O /tmp/config.sh http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/config.ph
 . /tmp/config.sh
 
 echo "$HOSTNAME" > /etc/hostname
+sed -i '/raspberrypi/ d' /etc/hosts
+echo "$IP	$HOSTNAME.$DOMAIN $HOSTNAME" >> /etc/hosts
+
+# Clean up raspi-setup
+rm -f /etc/profile.d/raspi-config.sh
+sed -i -e '/RPICFG_TO_ENABLE/ s/^#\(.*\)$/\1/g' -e '/RPICFG_TO_DISABLE/ s/^.*$/#&/g' /etc/inittab
+
+# Add users
+usermod -d /home/jille -l jille -m -p "$USER_JILLE_PASSWORD" -g users pi
+
+# Update security
+sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+sed -i '/NOPASSWD/ d' /etc/sudoers
+echo "Defaults rootpw" > /etc/sudoers.d/rootpw
+chmod 440 /etc/sudoers.d/rootpw
+
+# Update packages
+apt-get update -q
+apt-get upgrade -y
+
+for i in $EXTRA_SCRIPTS; do
+	wget -O /tmp/$i.sh http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/$i.txt
+	sh /tmp/$i.sh
+done
