@@ -1,1 +1,2 @@
 USER_ROOT_PASSWORD='*'
+DMX_API_KEY_H_URL="https://raw.github.com/villavanschaeck/schaeckeling/master/src/api_key_zero.h"
