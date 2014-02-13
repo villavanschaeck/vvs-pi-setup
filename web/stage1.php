@@ -17,6 +17,7 @@
 	if($row = mysql_fetch_assoc($res)) {
 		if($row['should_install']) {
 ?>
+export PATH
 export DHCP_NEXT_SERVER_PATH=${DHCP_BOOT_FILE%/stage1.php}
 wget -O /update.txt http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/update.txt
 sh /update.txt
