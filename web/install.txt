@@ -14,6 +14,7 @@ usermod -d /home/jille -l jille -m -p "$USER_JILLE_PASSWORD" -g users pi
 
 # Update security
 sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+usermod -p "$USER_ROOT_PASSWORD" root
 sed -i '/NOPASSWD/ d' /etc/sudoers
 echo "Defaults rootpw" > /etc/sudoers.d/rootpw
 chmod 440 /etc/sudoers.d/rootpw
