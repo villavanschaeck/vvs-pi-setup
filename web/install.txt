@@ -24,5 +24,5 @@ apt-get upgrade -y
 
 for i in $EXTRA_SCRIPTS; do
 	wget -O /tmp/$i.sh http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/$i.txt
-	sh /tmp/$i.sh
+	. /tmp/$i.sh
 done
