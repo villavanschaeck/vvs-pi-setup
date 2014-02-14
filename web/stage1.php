@@ -1,5 +1,6 @@
 <?php
 	header('Content-Type: text/plain');
+	echo "date -s '". date('Y-m-d H:i:s') ."'\n";
 
 	if(!require('mysql.php')) {
 		echo "echo Database error\n";
