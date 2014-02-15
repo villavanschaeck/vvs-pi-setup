@@ -2,6 +2,8 @@
 
 /etc/init.d/rcS
 
+export PATH
+
 sleep 3
 ifconfig eth0 up
 sleep 1
