@@ -12,7 +12,7 @@
 		exit;
 	}
 
-	$res = mysql_query("SELECT * FROM raspberrypi WHERE ip='". addslashes($ip) ."'");
+	$res = mysql_query("SELECT * FROM raspberrypis WHERE ip='". addslashes($ip) ."'");
 	if($row = mysql_fetch_assoc($res)) {
 		echo 'HOSTNAME='. $row['hostname'] ."\n";
 		echo "DOMAIN=vvs-nijmegen.nl\n";
