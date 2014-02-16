@@ -15,7 +15,7 @@
 	$res = mysql_query("SELECT * FROM raspberrypis WHERE ip='". addslashes($ip) ."'");
 	if($row = mysql_fetch_assoc($res)) {
 		echo 'HOSTNAME='. $row['hostname'] ."\n";
-		echo "DOMAIN=vvs-nijmegen.nl\n";
+		echo "DOMAIN=int.vvs-nijmegen.nl\n";
 		echo 'IP='. $row['ip'] ."\n";
 		echo 'EXTRA_SCRIPTS="'. str_replace(',', ' ', $row['functions']) ."\"\n";
 		if(is_file('local-config.txt')) {
