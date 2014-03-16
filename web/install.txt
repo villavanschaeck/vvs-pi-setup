@@ -12,6 +12,10 @@ sed -i -e '/RPICFG_TO_ENABLE/ s/^#\(.*\)$/\1/g' -e '/RPICFG_TO_DISABLE/ s/^.*$/#
 # Add users
 usermod -d /home/jille -l jille -m -p "$USER_JILLE_PASSWORD" -g users pi
 
+adduser --gid 100 --shell /bin/bash --gecos "Felix Janssen,,," --disabled-password felix
+usermod -p "$USER_FELIX_PASSWORD" felix
+adduser felix sudo
+
 # Update security
 sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 usermod -p "$USER_ROOT_PASSWORD" root
