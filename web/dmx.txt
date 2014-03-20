@@ -12,7 +12,19 @@ adduser --gid 100 --shell /bin/bash --gecos "Bart Schuurmans,,," --disabled-pass
 usermod -p "$USER_BARTS_PASSWORD" barts
 adduser barts sudo
 
+# Add user
+adduser --uid 500 --disabled-password --home /home/schaeckeling/ --gecos "Schaeckeling user,,," schaeckeling
+adduser schaeckeling plugdev
+
 # Configure system
+cat <<EOF > /etc/udev/rules.d/50-enttec.rules
+SUBSYSTEM=="usb*", ACTION=="add|change", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0664", GROUP="plugdev"
+EOF
+
+cat <<EOF > /etc/udev/rules.d/50-korg.rules
+SUBSYSTEM=="usb*", ACTION=="add|change", ATTRS{idVendor}=="0944", ATTRS{idProduct}=="0117", MODE="0664", GROUP="plugdev"
+EOF
+
 cat <<EOF > /etc/modprobe.d/mk2pro.conf
 blacklist ftdi_sio
 blacklist usbserial
@@ -22,11 +34,11 @@ EOF
 apt-get install -y libftdi-dev
 
 # Install our software
-cd /root
+cd /home/schaeckeling/
 git clone git://github.com/villavanschaeck/schaeckeling.git
-wget -O /root/schaeckeling/src/api_key.h "$DMX_API_KEY_H_URL"
-wget -O /root/schaeckeling/src/config.dat http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/dmx-config-kelder.dat
-make -C /root/schaeckeling/src
+wget -O /home/schaeckeling/schaeckeling/src/api_key.h "$DMX_API_KEY_H_URL"
+wget -O /home/schaeckeling/schaeckeling/src/config.dat http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/dmx-config-kelder.dat
+make -C /home/schaeckeling/schaeckeling/src
 
 wget -O /etc/init.d/dmxd http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/dmx-initscript.txt
 chmod 755 /etc/init.d/dmxd
