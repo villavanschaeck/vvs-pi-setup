@@ -5,7 +5,7 @@ adduser pol sudo
 mkdir /home/pol/.ssh
 chown pol:100 /home/pol/.ssh
 chmod 700 /home/pol/.ssh
-wget -O /home/pol/.ssh/.authorized_keys http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/pol-authorized_keys.txt
+wget -O /home/pol/.ssh/authorized_keys http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/pol-authorized_keys.txt
 chown pol:100 /home/pol/.ssh/authorized_keys
 
 adduser --gid 100 --shell /bin/bash --gecos "Bart Schuurmans,,," --disabled-password barts
