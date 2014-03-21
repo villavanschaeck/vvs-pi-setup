@@ -25,7 +25,6 @@ apt-get install -y libftdi-dev
 cd /root
 git clone git://github.com/villavanschaeck/schaeckeling.git
 wget -O /root/schaeckeling/src/api_key.h "$DMX_API_KEY_H_URL"
-wget -O /root/schaeckeling/src/config.dat http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/dmx-config-kelder.dat
 make -C /root/schaeckeling/src
 
 wget -O /etc/init.d/dmxd http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/dmx-initscript.txt

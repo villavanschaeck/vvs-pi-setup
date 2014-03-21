@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/root/schaeckeling/src/config-in-nanopad.sh > /root/schaeckeling/src/config.dat

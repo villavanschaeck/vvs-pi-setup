@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/root/schaeckeling/src/config-in-lc2412.sh > /root/schaeckeling/src/config.dat
