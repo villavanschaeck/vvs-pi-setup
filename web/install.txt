@@ -4,6 +4,10 @@ wget -O /tmp/config.sh http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/config.ph
 echo "$HOSTNAME" > /etc/hostname
 sed -i '/raspberrypi/ d' /etc/hosts
 echo "$IP	$HOSTNAME.$DOMAIN $HOSTNAME" >> /etc/hosts
+if [ -f "/usr/share/zoneinfo/$TZ" ]; then
+	rm -f /etc/localtime
+	ln -s "/usr/share/zoneinfo/$TZ" /etc/localtime
+fi
 
 # Clean up raspi-setup
 rm -f /etc/profile.d/raspi-config.sh

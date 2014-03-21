@@ -18,6 +18,7 @@
 		echo "DOMAIN=int.vvs-nijmegen.nl\n";
 		echo 'IP='. $row['ip'] ."\n";
 		echo 'EXTRA_SCRIPTS="'. str_replace(',', ' ', $row['functions']) ."\"\n";
+		echo 'TZ="'. date_default_timezone_get() ."\"\n";
 		if(is_file('local-config.txt')) {
 			readfile('local-config.txt');
 		}
