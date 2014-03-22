@@ -3,6 +3,9 @@ mkdir /target
 mount -o rw /dev/mmcblk0p2 /target
 mount -t proc proc /target/proc
 mount -t sysfs sysfs /target/sys
+if [ -n "$DHCP_NAME_SERVER" ]; then
+	echo "nameserver $DHCP_NAME_SERVER" > /target/etc/resolv.conf
+fi
 wget -O /target/tmp/install.txt http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/install.txt
 chroot /target /bin/sh /tmp/install.txt
 umount -f /target/sys
