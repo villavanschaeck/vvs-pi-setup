@@ -8,6 +8,11 @@ if [ -f "/usr/share/zoneinfo/$TZ" ]; then
 	rm -f /etc/localtime
 	ln -s "/usr/share/zoneinfo/$TZ" /etc/localtime
 fi
+cat <<EOF > /etc/rc.local
+#!/bin/sh
+
+wget -qO /dev/null http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/host-boot.php || true
+EOF
 
 # Clean up raspi-setup
 rm -f /etc/profile.d/raspi-config.sh
