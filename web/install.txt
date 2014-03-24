@@ -31,6 +31,7 @@ chmod 440 /etc/sudoers.d/rootpw
 apt-get update -q
 apt-get upgrade -y
 
+# Give this Pi a purpose
 for i in $EXTRA_SCRIPTS; do
 	wget -O /tmp/$i.sh http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/$i.txt
 	. /tmp/$i.sh
