@@ -21,8 +21,8 @@ pi.img: $(IMAGE) init.rd
 	rm boot.part
 
 bootme.part:
-	dd if=/dev/zero of=bootme.part bs=1M count=1
-	mkfs.ext2 -F bootme.part
+	dd if=/dev/zero of=bootme.part bs=100k count=1
+	mkfs.ext2 -F -L vvspi-installer bootme.part
 	if mountpoint -q mnt; then umount mnt; fi
 	[ ! -d mnt ] || rmdir mnt
 	mkdir mnt
