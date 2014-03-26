@@ -31,6 +31,7 @@ if ! mountpoint -q /target; then
 fi
 if [ -f /target/sbin/init ]; then
 	echo "Deconfiguring eth0"
+	killall udhcpc
 	ip addr flush dev eth0
 	exec switch_root -c /dev/console /target /sbin/init
 fi
