@@ -2,10 +2,10 @@
 	header('Content-Type: text/plain');
 	echo "date -us '". date('Y-m-d H:i:s', time() - date('Z')) ."'\n";
 
-	if(!require('mysql.php')) {
+	if(!include('mysql.php')) {
 		echo "echo Database error\n";
 		echo "sleep 60\n";
-		echo "reboot\n";
+		echo "reboot -f\n";
 		exit;
 	}
 
