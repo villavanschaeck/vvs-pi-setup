@@ -17,18 +17,27 @@ while [ ! -e /dev/mmcblk0 -a "$TRIES" -lt 3 ]; do
 	TRIES=$(($TRIES+1))
 done
 
-if [ -f /stage0.sh ]; then
-	sh /stage0.sh
-else
-	echo "/stage0.sh not found. dhcp failed?"
-fi
+while :; do
+	if [ -f /stage0.sh ]; then
+		sh /stage0.sh
+	else
+		echo "/stage0.sh not found. dhcp failed?"
+	fi
 
-if [ ! -d /target ]; then
-	mkdir /target 2>/dev/null
-fi
-if ! mountpoint -q /target; then
-	mount -o ro /dev/mmcblk0p2 /target
-fi
+	if [ ! -d /target ]; then
+		mkdir /target 2>/dev/null
+	fi
+	if ! mountpoint -q /target; then
+		mount -o ro /dev/mmcblk0p2 /target
+	fi
+	if [ ! -f /target/force_reinstall -o -n "$FORCE_REINSTALL" ]; then
+		break
+	fi
+	export FORCE_REINSTALL=1
+	umount /target
+	rm /target
+done
+
 if [ -f /target/sbin/init ]; then
 	echo "Deconfiguring eth0"
 	killall udhcpc
