@@ -3,3 +3,6 @@ pi.img
 target_fs
 init.rd
 installer.img
+boot.part
+bootme.part
+mnt/

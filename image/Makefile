@@ -20,8 +20,20 @@ pi.img: $(IMAGE) init.rd
 	dd if=boot.part of=pi.img seek=$(PART1OFFSET) count=$(PART1SIZE) conv=notrunc
 	rm boot.part
 
-installer.img: pi.img
+bootme.part:
+	dd if=/dev/zero of=bootme.part bs=1M count=1
+	mkfs.ext2 -F bootme.part
+	if mountpoint -q mnt; then umount mnt; fi
+	[ ! -d mnt ] || rmdir mnt
+	mkdir mnt
+	mount -o loop bootme.part mnt
+	touch mnt/force_reinstall
+	umount mnt
+	rmdir mnt
+
+installer.img: pi.img bootme.part
 	dd if=pi.img of=installer.img count=$$(($(PART1OFFSET)+$(PART1SIZE)))
+	dd if=bootme.part of=installer.img seek=$(PART2OFFSET) conv=notrunc
 
 init.rd: target_fs udhcpc.script init.sh oid.armhf
 	@[ -d target_fs ] || make target_fs
