@@ -12,7 +12,7 @@ case "$1" in
 		echo "domain $domain" >> /etc/resolv.conf
 		route add default gw $router
 
-		echo "export DHCP_NAME_SERVER=$namesvr" > /stage0.sh
+		echo "export DHCP_NAME_SERVER=$dns" > /stage0.sh
 		echo "export DHCP_NEXT_SERVER=$siaddr" >> /stage0.sh
 		echo "export DHCP_BOOT_FILE=$boot_file" >> /stage0.sh
 		echo 'wget -O /stage1.sh http://$DHCP_NEXT_SERVER/$DHCP_BOOT_FILE' >> /stage0.sh
