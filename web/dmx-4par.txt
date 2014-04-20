@@ -1,0 +1,3 @@
+#!/bin/sh
+
+wget -O /root/schaeckeling/src/program.dat http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/4par.prg
