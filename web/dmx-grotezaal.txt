@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/root/schaeckeling/src/config-in-lc2412.sh > /root/schaeckeling/src/config.dat
+wget -O /root/schaeckeling/src/program.dat http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/grotezaal.prg
