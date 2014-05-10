@@ -19,7 +19,16 @@ rm -f /etc/profile.d/raspi-config.sh
 sed -i -e '/RPICFG_TO_ENABLE/ s/^#\(.*\)$/\1/g' -e '/RPICFG_TO_DISABLE/ s/^.*$/#&/g' /etc/inittab
 
 # Add users
+install_authorized_keys () {
+	mkdir /home/$1/.ssh
+	chown $i:`id -g $1` /home/$1/.ssh
+	chmod 700 /home/$1/.ssh
+	wget -O /home/$1/.ssh/authorized_keys http://$DHCP_NEXT_SERVER/$DHCP_NEXT_SERVER_PATH/$1-authorized_keys.txt
+	chown $i:`id -g $1` ~$1/.ssh/authorized_keys
+}
+
 usermod -d /home/jille -l jille -m -p "$USER_JILLE_PASSWORD" -g users pi
+install_authorized_keys jille
 
 adduser --gid 100 --shell /bin/bash --gecos "Felix Janssen,,," --disabled-password felix
 usermod -p "$USER_FELIX_PASSWORD" felix
