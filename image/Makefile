@@ -33,7 +33,7 @@ bootme.part:
 
 installer.img: pi.img bootme.part
 	dd if=pi.img of=installer.img count=$$(($(PART1OFFSET)+$(PART1SIZE)))
-	dd if=bootme.part of=installer.img seek=$(PART2OFFSET) conv=notrunc
+	dd if=bootme.part of=installer.img seek=$(PART2OFFSET)
 
 init.rd: target_fs udhcpc.script init.sh oid.armhf
 	@[ -d target_fs ] || make target_fs
