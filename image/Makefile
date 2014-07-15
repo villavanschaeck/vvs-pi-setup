@@ -27,7 +27,7 @@ bootme.part:
 	[ ! -d mnt ] || rmdir mnt
 	mkdir mnt
 	mount -o loop bootme.part mnt
-	touch mnt/force_reinstall
+	touch mnt/installation-required
 	umount mnt
 	rmdir mnt
 
